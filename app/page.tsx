@@ -6,18 +6,31 @@ import Link from "next/link"
 import { ChevronLeft, ChevronRight, MapPin, Phone, Mail, Instagram, Facebook, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+// Custom Pinterest icon component since it's not in lucide-react
+const PinterestIcon = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.690 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.001 24c6.624 0 11.999-5.373 11.999-12C24 5.372 18.627.001 12.001.001z"/>
+  </svg>
+)
+
 const projects = [
   {
-    title: "PALM BEACH OCEAN VIEW",
-    image: "/placeholder.svg?height=400&width=600&text=Palm+Beach+Ocean+View",
+    title: "FALMOUTH LAKE VIEW",
+    image: "/placeholder.svg?height=400&width=600&text=Falmouth+Lake+View",
   },
   {
-    title: "SOPHISTICATED COASTAL LUXURY",
-    image: "/placeholder.svg?height=400&width=600&text=Sophisticated+Coastal+Luxury",
+    title: "SOPHISTICATED CAPE LUXURY",
+    image: "/placeholder.svg?height=400&width=600&text=Sophisticated+Cape+Luxury",
   },
   {
-    title: "MURANO AT PORTOFINO",
-    image: "/placeholder.svg?height=400&width=600&text=Murano+at+Portofino",
+    title: "HYANNIS LUXURY REMODEL",
+    image: "/placeholder.svg?height=400&width=600&text=Hyannis+Luxury+Remodel",
   },
 ]
 
@@ -41,9 +54,10 @@ const featuredLogos = [
   { name: "VoyageMIA", logo: "/placeholder.svg?height=60&width=120&text=VoyageMIA" },
 ]
 
-export default function ArtisticElementsWebsite() {
+export default function CapePropertyProsWebsite() {
   const [currentProject, setCurrentProject] = useState(1)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [navOpacity, setNavOpacity] = useState(1)
 
   const nextProject = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length)
@@ -60,10 +74,70 @@ export default function ArtisticElementsWebsite() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      const maxScroll = 300 // Fade out over 300px of scrolling
+      const opacity = Math.max(0, 1 - (scrollY / maxScroll))
+      setNavOpacity(opacity)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Left Social Media Sidebar */}
+      <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-4">
+        <Link 
+          href="mailto:info@capepropertypros.com" 
+          className="backdrop-blur-sm p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          style={{
+            background: 'linear-gradient(to right, rgba(220, 203, 188, 0.8), rgba(196, 174, 158, 0.75), rgba(155, 133, 117, 0.7))'
+          }}
+        >
+          <Mail className="w-5 h-5 text-white hover:text-gray-100" />
+        </Link>
+        <Link 
+          href="#" 
+          className="backdrop-blur-sm p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          style={{
+            background: 'linear-gradient(to right, rgba(220, 203, 188, 0.8), rgba(196, 174, 158, 0.75), rgba(155, 133, 117, 0.7))'
+          }}
+        >
+          <Facebook className="w-5 h-5 text-white hover:text-blue-200" />
+        </Link>
+        <Link 
+          href="#" 
+          className="backdrop-blur-sm p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          style={{
+            background: 'linear-gradient(to right, rgba(220, 203, 188, 0.8), rgba(196, 174, 158, 0.75), rgba(155, 133, 117, 0.7))'
+          }}
+        >
+          <Instagram className="w-5 h-5 text-white hover:text-pink-200" />
+        </Link>
+        <Link 
+          href="#" 
+          className="backdrop-blur-sm p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          style={{
+            background: 'linear-gradient(to right, rgba(220, 203, 188, 0.8), rgba(196, 174, 158, 0.75), rgba(155, 133, 117, 0.7))'
+          }}
+        >
+          <div className="w-5 h-5 text-white hover:text-red-200">
+            <PinterestIcon />
+          </div>
+        </Link>
+      </div>
+
       {/* Navigation */}
-      <nav className="bg-background/95 backdrop-blur-sm fixed top-0 w-full z-50 border-b border-border">
+      <nav 
+        className="backdrop-blur-sm fixed top-0 w-full z-50 border-b border-rose-300/30 transition-opacity duration-300" 
+        style={{
+          background: 'linear-gradient(to right, rgba(220, 203, 188, 0.5), rgba(196, 174, 158, 0.45), rgba(155, 133, 117, 0.4))',
+          opacity: navOpacity
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -79,11 +153,13 @@ export default function ArtisticElementsWebsite() {
             </div>
 
             <div className="flex items-center">
-              <div className="border-2 border-foreground px-3 py-1">
-                <span className="text-foreground font-bold text-sm">ARTISTIC</span>
-                <br />
-                <span className="text-foreground font-light text-xs">ELEMENTS</span>
-              </div>
+              <Image
+                src="/white-logo.png"
+                alt="Cape Property Pros Logo"
+                width={120}
+                height={50}
+                className="h-12 w-auto"
+              />
             </div>
 
             <div className="flex items-center space-x-8">
@@ -114,17 +190,23 @@ export default function ArtisticElementsWebsite() {
         </div>
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="text-center text-primary">
-            <h1 className="text-6xl md:text-7xl font-light mb-8 tracking-wide">INTERIOR DESIGN & HOME DECOR</h1>
+            <h1 className="text-6xl md:text-7xl font-light mb-8 tracking-wide gradient-text">INTERIOR DESIGN & HOME DECOR</h1>
             <div className="flex gap-4 justify-center">
               <Button
                 variant="outline"
-                className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3"
+                className="px-8 py-3 text-white border-0 hover:opacity-90 transition-opacity"
+                style={{
+                  background: 'linear-gradient(to right, rgba(220, 203, 188, 1), rgba(196, 174, 158, 1), rgba(155, 133, 117, 1))'
+                }}
               >
                 INTERIOR DESIGN
               </Button>
               <Button
                 variant="outline"
-                className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3"
+                className="px-8 py-3 text-white border-0 hover:opacity-90 transition-opacity"
+                style={{
+                  background: 'linear-gradient(to right, rgba(220, 203, 188, 1), rgba(196, 174, 158, 1), rgba(155, 133, 117, 1))'
+                }}
               >
                 SHOP NOW
               </Button>
@@ -246,7 +328,12 @@ export default function ArtisticElementsWebsite() {
       </section>
 
       {/* Who We Are */}
-      <section className="py-0" style={{ backgroundColor: 'hsl(20 20% 70%)' }}>
+      <section 
+        className="py-0" 
+        style={{ 
+          background: 'linear-gradient(to right, rgba(220, 203, 188, 1), rgba(196, 174, 158, 1), rgba(155, 133, 117, 1))'
+        }}
+      >
         <div className="max-w-full">
           <div className="grid lg:grid-cols-2 min-h-[600px]">
             <div className="relative">
@@ -273,10 +360,10 @@ export default function ArtisticElementsWebsite() {
                 </h2>
                 <h3 className="text-5xl font-light mb-8 tracking-wider uppercase" style={{ color: 'white' }}>WHO WE ARE</h3>
                 <p className="text-white mb-6 leading-relaxed text-lg">
-                  Artistic Elements is the premier luxury Showroom, and Interior Design Studio in South Florida. It is
-                  led by husband & wife team, Drew and Katya Thompson. Katya is an international award-winning licensed
-                  Interior Designer and Drew is an MBA and accomplished businessman. Their shared talents uniquely allow
-                  for Artistic Elements to provide a Personalized Luxury Experience like no other.
+                  Cape Property Pros is the premier luxury Showroom, and Interior Design Studio in Cape Cod. It is
+                  led by husband & wife team, Boriss and Jovanov Antonent. Jovanov is an award-winning licensed
+                  Interior Designer and Boriss is an accomplished businessman and experienced builder. Their shared talents uniquely allow
+                  for Cape Property Pros to provide a Personalized Luxury Experience like no other.
                 </p>
                 <p className="text-white mb-8 leading-relaxed text-lg">
                   Our Boutique showcases High-End Furniture • Unique Home Accessories • Exquisite Art and Framing •
@@ -323,7 +410,13 @@ export default function ArtisticElementsWebsite() {
                 licensed Interior Designers as well as white-glove delivery, setup, and installation.
               </p>
               <div className="flex gap-4">
-                <Button variant="default" className="bg-accent hover:bg-accent/80 text-accent-foreground px-8 py-3">
+                <Button 
+                  variant="default" 
+                  className="px-8 py-3 text-white border-0 hover:opacity-90 transition-opacity"
+                  style={{
+                    background: 'linear-gradient(to right, rgba(220, 203, 188, 1), rgba(196, 174, 158, 1), rgba(155, 133, 117, 1))'
+                  }}
+                >
                   GO TO THE SHOWROOM
                 </Button>
                 <Button
@@ -347,11 +440,7 @@ export default function ArtisticElementsWebsite() {
       >
         <div className="absolute inset-0 bg-background/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-5xl font-light text-primary mb-12 tracking-wider">IMAGINE THE POSSIBILITIES</h2>
-          <blockquote className="text-2xl font-light text-primary italic leading-relaxed">
-            "We provide a turnkey solution using the latest in technology to allow you to visualize your design
-            throughout the process."
-          </blockquote>
+          <h2 className="text-5xl gradient-text mb-12 tracking-wider">IMAGINE THE POSSIBILITIES</h2>
         </div>
       </section>
 
@@ -391,7 +480,7 @@ export default function ArtisticElementsWebsite() {
       {/* Featured In */}
       <section className="py-16 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-light text-foreground text-center mb-12 tracking-wider">FEATURED IN</h2>
+          <h2 className="text-4xl gradient-text text-center mb-12 tracking-wider">FEATURED IN</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
             {featuredLogos.map((logo, index) => (
               <div key={index} className="flex justify-center">
@@ -474,17 +563,19 @@ export default function ArtisticElementsWebsite() {
           <div className="grid lg:grid-cols-4 gap-8">
             {/* Logo and Info */}
             <div>
-              <div className="border-2 border-primary-foreground px-3 py-2 inline-block mb-6">
-                <span className="font-bold text-sm">ARTISTIC</span>
-                <br />
-                <span className="font-light text-xs">ELEMENTS</span>
-              </div>
+              <Image
+                src="/white-logo.png"
+                alt="Cape Property Pros Logo"
+                width={120}
+                height={50}
+                className="h-12 w-auto mb-6"
+              />
               <p className="text-sm text-muted-foreground mb-4">luxury decor • framing • designs</p>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h3 className="font-semibold mb-4 text-primary-foreground">ARTISTIC ELEMENTS</h3>
+              <h3 className="font-semibold mb-4 text-primary-foreground">CAPE PROPERTY PROS</h3>
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
@@ -500,7 +591,7 @@ export default function ArtisticElementsWebsite() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  <span>info@theartisticelements.com</span>
+                  <span>info@capepropertypros.com</span>
                 </div>
               </div>
             </div>
