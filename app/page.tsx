@@ -181,8 +181,8 @@ export default function CapePropertyProsWebsite() {
       <section className="relative h-screen mt-16">
         <div className="absolute inset-0">
           <Image
-            src="/placeholder.svg?height=800&width=1600&text=Luxury+Interior+Design+Hero"
-            alt="Interior Design Hero"
+            src="/hero-kitchen.jpg"
+            alt="Luxury Kitchen Design Showroom"
             fill
             className="object-cover"
           />
