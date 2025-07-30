@@ -27,6 +27,12 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  
+  .gradient-text-white {
+    font-family: 'Playfair Display', serif; /* or another serif like Bodoni */
+    font-weight: 600;
+    color: white;
+  }
 }
 
 @layer base {
