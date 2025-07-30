@@ -21,16 +21,28 @@ const PinterestIcon = () => (
 
 const projects = [
   {
-    title: "FALMOUTH LAKE VIEW",
-    image: "/placeholder.svg?height=400&width=600&text=Falmouth+Lake+View",
+    title: "CHATAM RESIDENCE",
+    image: "/bathroom.jpg?height=400&width=600&text=Falmouth+Lake+View",
   },
   {
     title: "SOPHISTICATED CAPE LUXURY",
-    image: "/placeholder.svg?height=400&width=600&text=Sophisticated+Cape+Luxury",
+    image: "/Kitchen1.jpg?height=400&width=600&text=Sophisticated+Cape+Luxury",
   },
   {
-    title: "HYANNIS LUXURY REMODEL",
-    image: "/placeholder.svg?height=400&width=600&text=Hyannis+Luxury+Remodel",
+    title: "STUNNING CAPE HOUSE",
+    image: "/bedroom.jpg?height=400&width=600&text=Hyannis+Luxury+Remodel",
+  },
+  {
+    title: "SLIDE 1",
+    image: "/Slide1.jpg",
+  },
+  {
+    title: "SLIDE 2",
+    image: "/slide2.jpg",
+  },
+  {
+    title: "SLIDE 3",
+    image: "/slide3.jpg",
   },
 ]
 
@@ -55,16 +67,22 @@ const featuredLogos = [
 ]
 
 export default function CapePropertyProsWebsite() {
-  const [currentProject, setCurrentProject] = useState(1)
+  const [currentProject, setCurrentProject] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [navOpacity, setNavOpacity] = useState(1)
+  const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(null)
+  const [fading, setFading] = useState(false)
 
   const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length)
+    if (currentProject < projects.length - 3) {
+      setCurrentProject((prev) => prev + 1)
+    }
   }
 
   const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length)
+    if (currentProject > 0) {
+      setCurrentProject((prev) => prev - 1)
+    }
   }
 
   useEffect(() => {
@@ -139,37 +157,36 @@ export default function CapePropertyProsWebsite() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-28">
             <div className="flex items-center space-x-8">
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 PROJECTS
               </Link>
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 DESIGN
               </Link>
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 SHOP NOW
               </Link>
             </div>
 
             <div className="flex items-center">
               <Image
-                src="/white-logo.png"
+                src="/white-logo.jpg"
                 alt="Cape Property Pros Logo"
-                width={120}
-                height={50}
-                className="h-12 w-auto"
+                width={300}
+                height={120}
               />
             </div>
 
             <div className="flex items-center space-x-8">
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 SHOWROOM
               </Link>
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 OUR TEAM
               </Link>
-              <Link href="#" className="text-foreground hover:text-muted-foreground font-medium">
+              <Link href="#" className="text-white hover:text-gray-300 font-medium">
                 CONTACT US
               </Link>
             </div>
@@ -178,19 +195,20 @@ export default function CapePropertyProsWebsite() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen mt-16">
+      <section className="relative h-screen">
         <div className="absolute inset-0">
           <Image
             src="/hero-kitchen.jpg"
             alt="Luxury Kitchen Design Showroom"
             fill
             className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/20 to-background/60" />
         </div>
-        <div className="relative z-10 flex items-center justify-center h-full">
+        <div className="relative z-10 flex items-end justify-center h-full pb-32">
           <div className="text-center text-primary">
-            <h1 className="text-6xl md:text-7xl font-light mb-8 tracking-wide gradient-text">INTERIOR DESIGN & HOME DECOR</h1>
+            <h1 className="text-6xl md:text-7xl font-light mb-8 tracking-wide gradient-text-white">INTERIOR DESIGN & HOME DECOR</h1>
             <div className="flex gap-4 justify-center">
               <Button
                 variant="outline"
@@ -229,19 +247,19 @@ export default function CapePropertyProsWebsite() {
             <h2 className="text-4xl font-script text-black mb-2 font-medium">
               Our latest Completed Project:
             </h2>
-            <h3 className="text-6xl gradient-text mb-8 tracking-wider uppercase">CENTERVILLE RESIDENCE</h3>
+            <h3 className="text-6xl gradient-text mb-8 tracking-wider uppercase">HYANNIS RESIDENCE</h3>
             <p className="text-muted-foreground mt-2">3,600 Sq.Ft. • 3 bed/2.5 bath</p>
           </div>
 
           <div className="relative">
             <div className="aspect-video rounded-lg overflow-hidden">
-              <video
+              <Image
+                src="/House.jpg?height=600&width=1200&text=Boca+Beach+Residence+Video"
+                alt="HYANNIS RESIDENCE"
+                width={1200}
+                height={600}
                 className="w-full h-full object-cover"
-                controls
-                poster="/placeholder.svg?height=600&width=1200&text=Boca+Beach+Residence+Video"
-              >
-                <source src="#" type="video/mp4" />
-              </video>
+              />
             </div>
           </div>
         </div>
@@ -272,7 +290,7 @@ export default function CapePropertyProsWebsite() {
             <div className="relative">
               <div className="border border-border p-4">
                 <Image
-                  src="/placeholder.svg?height=500&width=700&text=Luxury+Kitchen+Interior"
+                  src="/photo (30).jpg?height=500&width=700&text=Luxury+Kitchen+Interior"
                   alt="Luxury Kitchen Interior"
                   width={700}
                   height={500}
@@ -285,41 +303,52 @@ export default function CapePropertyProsWebsite() {
       </section>
 
       {/* Completed Projects Carousel */}
-      <section className="py-20 bg-background">
+      <section className="py-2 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-script text-black mb-8 font-medium">
+          <div className="text-center mb-6">
+            <h2 className="text-4xl font-script text-black mb-6 font-medium">
               Completed Projects
             </h2>
           </div>
 
           <div className="relative">
-            <div className="grid md:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
-                <div key={index} className="relative group">
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-500"
+                style={{ transform: `translateX(-${currentProject * (100 / 3)}%)`, width: `${(projects.length / 3) * 100}%` }}
+              >
+                {projects.map((project, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-full md:w-1/3 px-2 box-border"
+                    style={{ maxWidth: '100%', minWidth: 0 }}
+                  >
+                    <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                      <Image
+                        src={project.image || "/bathroom.jpg.svg"}
+                        alt={project.title}
+                        width={250}
+                        height={150}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <h3 className="text-center mt-4 text-foreground font-medium tracking-wide">{project.title}</h3>
                   </div>
-                  <h3 className="text-center mt-4 text-foreground font-medium tracking-wide">{project.title}</h3>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             <button
               onClick={prevProject}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg disabled:opacity-50"
+              disabled={currentProject === 0}
             >
               <ChevronLeft className="w-6 h-6 text-foreground" />
             </button>
             <button
               onClick={nextProject}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg disabled:opacity-50"
+              disabled={currentProject >= projects.length - 3}
             >
               <ChevronRight className="w-6 h-6 text-foreground" />
             </button>
@@ -338,7 +367,7 @@ export default function CapePropertyProsWebsite() {
           <div className="grid lg:grid-cols-2 min-h-[600px]">
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=600&width=800&text=Drew+and+Katya+Thompson"
+                src="/ToniCPP-9.jpg?height=400&width=600&text=Testimonial+Interior"
                 alt="Drew and Katya Thompson"
                 width={800}
                 height={600}
@@ -346,10 +375,7 @@ export default function CapePropertyProsWebsite() {
               />
               <div className="absolute bottom-8 left-8 bg-white rounded-full p-4 shadow-lg">
                 <div className="text-center">
-                  <div className="text-lg font-bold text-black">AD</div>
-                  <div className="text-xs text-black">PRO DIRECTORY</div>
-                  <div className="text-xs font-bold text-black">2024 FEATURED</div>
-                  <div className="text-xs font-bold text-black">DESIGNER</div>
+                  
                 </div>
               </div>
             </div>
@@ -388,7 +414,7 @@ export default function CapePropertyProsWebsite() {
             <div className="relative">
               <div className="border border-border p-4">
                 <Image
-                  src="/placeholder.svg?height=400&width=600&text=Showroom+Interior"
+                  src="/cs3 (1).jpg?height=400&width=600&text=Showroom+Interior"
                   alt="Showroom Interior"
                   width={600}
                   height={400}
@@ -435,12 +461,19 @@ export default function CapePropertyProsWebsite() {
       <section
         className="py-20 bg-cover bg-center relative"
         style={{
-          backgroundImage: "url('/placeholder.svg?height=600&width=1600&text=Luxury+Interior+Background')",
+          backgroundImage: "url('background-image.jpeg?height=600&width=1600&text=Luxury+Interior+Background')",
+          backgroundAttachment: "fixed",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="absolute inset-0 bg-background/60" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-5xl gradient-text mb-12 tracking-wider">IMAGINE THE POSSIBILITIES</h2>
+          <h2
+            className="text-5xl gradient-text mb-12 tracking-wider"
+          >
+            IMAGINE THE POSSIBILITIES
+          </h2>
         </div>
       </section>
 
@@ -465,7 +498,7 @@ export default function CapePropertyProsWebsite() {
               </div>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=500&width=600&text=Woman+on+Luxury+Sofa"
+                  src="/Tonjy.jpg?height=500&width=600&text=Woman+on+Luxury+Sofa"
                   alt="Woman on Luxury Sofa"
                   width={600}
                   height={500}
@@ -513,7 +546,7 @@ export default function CapePropertyProsWebsite() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=400&width=600&text=Testimonial+Interior"
+                src="/testimony.jpg?height=400&width=600&text=Testimonial+Interior"
                 alt="Testimonial Interior"
                 width={600}
                 height={400}
@@ -530,17 +563,6 @@ export default function CapePropertyProsWebsite() {
             </div>
           </div>
 
-          {/* Google Reviews */}
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">Read all reviews on</p>
-            <Image
-              src="/placeholder.svg?height=30&width=100&text=Google"
-              alt="Google Reviews"
-              width={100}
-              height={30}
-              className="mx-auto"
-            />
-          </div>
 
           {/* Testimonial dots */}
           <div className="flex justify-center space-x-2 mt-8">
@@ -564,11 +586,11 @@ export default function CapePropertyProsWebsite() {
             {/* Logo and Info */}
             <div>
               <Image
-                src="/white-logo.png"
+                src="/white-logo.jpg"
                 alt="Cape Property Pros Logo"
-                width={120}
-                height={50}
-                className="h-12 w-auto mb-6"
+                width={240}
+                height={110}
+                className="mb-6"
               />
               <p className="text-sm text-muted-foreground mb-4">luxury decor • framing • designs</p>
             </div>
@@ -580,9 +602,8 @@ export default function CapePropertyProsWebsite() {
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
                   <span>
-                    400 E. Palmetto Park Rd.,
-                    <br />
-                    Boca Raton, FL 33432
+                    394 Main St Ste 2,<br />
+                    West Dennis, MA 02670
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
