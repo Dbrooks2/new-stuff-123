@@ -21,28 +21,28 @@ const PinterestIcon = () => (
 
 const projects = [
   {
+    title: "MURANO AT PORTOFINO",
+    image: "/bathroom.jpg?height=400&width=600&text=Murano+at+Portofino",
+  },
+  {
+    title: "INTRACOASTAL REMODEL",
+    image: "/Kitchen1.jpg?height=400&width=600&text=Intracoastal+Remodel",
+  },
+  {
+    title: "BOCA BEACH RESIDENCE",
+    image: "/bedroom.jpg?height=400&width=600&text=Boca+Beach+Residence",
+  },
+  {
     title: "CHATAM RESIDENCE",
-    image: "/bathroom.jpg?height=400&width=600&text=Falmouth+Lake+View",
+    image: "/Slide1.jpg?height=400&width=600&text=Chatam+Residence",
   },
   {
     title: "SOPHISTICATED CAPE LUXURY",
-    image: "/Kitchen1.jpg?height=400&width=600&text=Sophisticated+Cape+Luxury",
+    image: "/slide2.jpg?height=400&width=600&text=Sophisticated+Cape+Luxury",
   },
   {
     title: "STUNNING CAPE HOUSE",
-    image: "/bedroom.jpg?height=400&width=600&text=Hyannis+Luxury+Remodel",
-  },
-  {
-    title: "SLIDE 1",
-    image: "/Slide1.jpg",
-  },
-  {
-    title: "SLIDE 2",
-    image: "/slide2.jpg",
-  },
-  {
-    title: "SLIDE 3",
-    image: "/slide3.jpg",
+    image: "/slide3.jpg?height=400&width=600&text=Stunning+Cape+House",
   },
 ]
 
@@ -303,9 +303,9 @@ export default function CapePropertyProsWebsite() {
       </section>
 
       {/* Completed Projects Carousel */}
-      <section className="py-2 bg-background">
+      <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-script text-black mb-6 font-medium">
               Completed Projects
             </h2>
@@ -320,19 +320,19 @@ export default function CapePropertyProsWebsite() {
                 {projects.map((project, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-full md:w-1/3 px-2 box-border"
+                    className="flex-shrink-0 w-full md:w-1/3 px-4 box-border"
                     style={{ maxWidth: '100%', minWidth: 0 }}
                   >
-                    <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                    <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
                       <Image
                         src={project.image || "/bathroom.jpg.svg"}
                         alt={project.title}
-                        width={250}
-                        height={150}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        width={400}
+                        height={300}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <h3 className="text-center mt-4 text-foreground font-medium tracking-wide">{project.title}</h3>
+                    <h3 className="text-center mt-6 text-foreground font-light tracking-wider text-lg uppercase">{project.title}</h3>
                   </div>
                 ))}
               </div>
@@ -340,17 +340,17 @@ export default function CapePropertyProsWebsite() {
 
             <button
               onClick={prevProject}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg disabled:opacity-50"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg disabled:opacity-50 transition-all duration-300"
               disabled={currentProject === 0}
             >
-              <ChevronLeft className="w-6 h-6 text-foreground" />
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
             </button>
             <button
               onClick={nextProject}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-card/80 hover:bg-card p-2 rounded-full shadow-lg disabled:opacity-50"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg disabled:opacity-50 transition-all duration-300"
               disabled={currentProject >= projects.length - 3}
             >
-              <ChevronRight className="w-6 h-6 text-foreground" />
+              <ChevronRight className="w-6 h-6 text-gray-700" />
             </button>
           </div>
         </div>
